@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1677d2">
+<meta name="description" content="Previsão do tempo hora a hora para cidades do Paraná, fontes meteorológicas e telefones de emergência.">
+<title>Tempo Paraná | Clima & Prevenção</title>
+<style>
+:root{--bg:#edf5ff;--surface:rgba(255,255,255,.88);--card:#fff;--text:#132844;--muted:#647891;--line:rgba(30,75,125,.12);--accent:#1677d2;--accent2:#27b7c7;--shadow:0 16px 45px rgba(25,69,115,.12)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);transition:background .8s,color .5s;min-height:100vh}
+body.morning{--bg:linear-gradient(135deg,#d8f0ff,#f2f8ff 55%,#e3f6f7);--accent:#1677d2}
+body.afternoon{--bg:linear-gradient(135deg,#f6d9e8,#fcecf0 50%,#dbeaff);--accent:#a44b83}
+body.evening{--bg:linear-gradient(135deg,#182b55,#51416f 55%,#f09b8b);--text:#fff;--muted:#e0e2f2;--surface:rgba(20,30,63,.8);--card:rgba(24,35,69,.92);--line:rgba(255,255,255,.14);--accent:#ffb8a8;--accent2:#f6c2d9;--shadow:0 18px 50px rgba(0,0,0,.22)}
+body.night{--bg:linear-gradient(135deg,#071329,#111e3d 65%,#172a4a);--text:#eef5ff;--muted:#aebed5;--surface:rgba(13,26,50,.9);--card:rgba(18,34,62,.96);--line:rgba(255,255,255,.11);--accent:#7bb7ff;--accent2:#76d5e4;--shadow:0 18px 50px rgba(0,0,0,.25)}
+body{background:var(--bg)}a{color:var(--accent);font-weight:700}button,select{font:inherit}button,select,.btn{border:1px solid var(--line);border-radius:12px;padding:11px 14px;background:var(--card);color:var(--text);cursor:pointer}button:hover,.btn:hover{filter:brightness(.97)}.shell{max-width:1240px;margin:auto;padding:22px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;font-size:26px;background:linear-gradient(135deg,#1b8ce0,#3bc8c6);box-shadow:var(--shadow)}h1{font-size:clamp(20px,3vw,29px);margin:0;letter-spacing:-.8px} .sub{color:var(--muted);font-size:13px;margin-top:3px}.header-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.live{display:inline-flex;align-items:center;gap:7px;border-radius:30px;padding:8px 11px;background:var(--surface);font-size:12px;font-weight:800}.dot{width:8px;height:8px;background:#32c777;border-radius:50%;box-shadow:0 0 0 4px #32c77722}
+.hero{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:28px;padding:28px;background:var(--surface);box-shadow:var(--shadow);margin-bottom:18px}.hero:after{content:"";position:absolute;right:-40px;top:-90px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,var(--accent2),transparent 68%);opacity:.18;pointer-events:none}.hero-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;flex-wrap:wrap;position:relative;z-index:1}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:1.7px;font-weight:800;color:var(--muted)}.cityline{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:9px}.cityline h2{margin:0;font-size:clamp(25px,4vw,36px);letter-spacing:-1px}.city-select{min-width:210px;max-width:100%;background:var(--card)}.now{display:flex;align-items:center;gap:22px;margin-top:22px;flex-wrap:wrap}.big-icon{font-size:72px;line-height:1;filter:drop-shadow(0 8px 10px #1c487622)}.temp{font-size:clamp(58px,9vw,88px);line-height:.95;font-weight:800;letter-spacing:-5px}.desc{font-size:18px;font-weight:750;margin-top:9px}.feels{color:var(--muted);margin-top:6px;font-size:13px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:26px;position:relative;z-index:1}.stat{padding:15px;border:1px solid var(--line);border-radius:17px;background:var(--card)}.stat-label{font-size:12px;color:var(--muted)}.stat-value{font-size:20px;font-weight:800;margin-top:7px}.section{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:17px}.section h3{margin:0;font-size:19px;letter-spacing:-.4px}.section p{margin:6px 0 0;color:var(--muted);font-size:13px}.hourly{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:thin}.hour{min-width:108px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:17px;padding:14px 10px;flex:0 0 auto}.hour.current{border:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--card))}.hour-time{font-weight:800;font-size:13px}.hour-icon{font-size:29px;margin:12px 0}.hour-temp{font-size:22px;font-weight:800}.hour-rain{font-size:12px;color:var(--accent);margin-top:8px}.hour-wind{font-size:11px;color:var(--muted);margin-top:5px}.days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.day{padding:15px;border:1px solid var(--line);border-radius:17px;background:var(--card);min-width:0}.day-name{font-weight:800}.day-date{font-size:11px;color:var(--muted);margin-top:3px}.day-icon{font-size:28px;margin:12px 0}.day-desc{font-size:12px;color:var(--muted);min-height:32px}.day-temps{display:flex;gap:8px;align-items:center;font-weight:800;margin-top:10px}.day-temps span+span{color:var(--muted);font-weight:600}.rainbar{height:5px;border-radius:9px;background:var(--line);margin-top:12px;overflow:hidden}.rainbar span{display:block;height:100%;background:linear-gradient(90deg,#49b9ed,#3477ec);border-radius:9px}.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.notice{border-radius:17px;padding:16px;background:var(--card);border:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}.notice-icon{font-size:24px}.notice strong{display:block;margin-bottom:4px}.notice p{line-height:1.5}.source-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.source-links a,.actionlink{display:inline-flex;text-decoration:none;border:1px solid var(--line);padding:10px 12px;border-radius:12px;background:var(--card);font-size:13px}.emergency-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.emergency{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:15px;display:flex;flex-direction:column;gap:7px}.emergency .num{font-size:27px;font-weight:900;letter-spacing:-1px}.emergency small{color:var(--muted);min-height:32px}.call{margin-top:4px;text-align:center;text-decoration:none;background:var(--accent);color:#fff;border-radius:10px;padding:9px;font-weight:800}.body.evening .call,.body.night .call{color:#10213b}.places{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.place{border:1px solid var(--line);border-radius:17px;padding:16px;background:var(--card)}.place-icon{font-size:25px}.place h4{margin:9px 0 5px}.place p{line-height:1.45;min-height:38px}.place a{display:inline-block;margin-top:9px;text-decoration:none}.safety{padding-left:20px;color:var(--muted);line-height:1.7;font-size:13px}.footer{padding:8px 2px 25px;color:var(--muted);font-size:12px;line-height:1.65}.status{font-size:12px;color:var(--muted);margin-top:12px}.loading{opacity:.6;pointer-events:none}.warn{color:#b45309}.tag{border-radius:99px;background:var(--card);border:1px solid var(--line);padding:6px 10px;font-size:12px;font-weight:800}
+@media(max-width:850px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.days{grid-template-columns:repeat(5,170px);overflow-x:auto;padding-bottom:8px}.grid2{grid-template-columns:1fr}.emergency-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.places{grid-template-columns:1fr}}
+@media(max-width:540px){.shell{padding:13px}.hero{padding:20px;border-radius:22px}.section{padding:17px;border-radius:20px}header{align-items:flex-start}.header-right{max-width:130px}.header-right .live{display:none}.city-select{width:100%;min-width:0}.now{gap:13px}.big-icon{font-size:55px}.temp{font-size:64px}.stats{gap:8px}.stat{padding:12px}.stat-value{font-size:18px}.emergency-grid{gap:8px}.emergency{padding:12px}.emergency .num{font-size:25px}}
+
+.alert-panel{border-radius:24px;padding:22px;margin-bottom:18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
+.alert-banner{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.alert-banner.critical{border-color:#ef4444;background:linear-gradient(120deg,#fff0ef,#fff 75%);color:#712323}
+.alert-banner.watch{border-color:#f59e0b;background:linear-gradient(120deg,#fff7df,#fff 75%);color:#68420a}
+.alert-banner.ok{border-color:#22a06b;background:linear-gradient(120deg,#e8fff3,#fff 75%);color:#155b3d}
+.alert-symbol{font-size:31px;line-height:1}.alert-title{font-size:18px;font-weight:900;margin-bottom:5px}.alert-copy{font-size:13px;line-height:1.55}.alert-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.alert-step{padding:15px;background:var(--card);border:1px solid var(--line);border-radius:16px}.alert-step b{display:block;margin-bottom:6px}.alert-step p{font-size:12px;line-height:1.55;color:var(--muted);margin:0}.notify-note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:12px}
+@media(max-width:760px){.alert-actions{grid-template-columns:1fr}.alert-panel{padding:16px}.alert-banner{padding:14px}}
+
+
+/* Redesign: navegação por áreas, hierarquia visual e experiência responsiva */
+:root{--bg:#f3f7fc;--surface:#fff;--card:#f8fbff;--text:#102b49;--muted:#62758b;--line:#dce6f1;--accent:#0878c9;--accent2:#25b6c9;--shadow:0 10px 30px rgba(15,47,82,.07)}
+body{background:#f3f7fc!important;color:#102b49!important;transition:none;}
+body.morning,body.afternoon,body.evening,body.night{--bg:#f3f7fc;--surface:#fff;--card:#f8fbff;--text:#102b49;--muted:#62758b;--line:#dce6f1;--accent:#0878c9;--accent2:#25b6c9;}
+.app-layout{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh;max-width:1680px;margin:0 auto;background:#f3f7fc}
+.sidebar{background:linear-gradient(180deg,#082746 0%,#061b31 100%);color:#eef6ff;padding:24px 16px;display:flex;flex-direction:column;gap:22px;min-height:100vh;position:sticky;top:0;height:100vh;overflow:auto;z-index:10}
+.side-brand{display:flex;gap:11px;align-items:center;color:#fff;text-decoration:none;padding:0 5px 22px;border-bottom:1px solid #ffffff1c}
+.side-logo{width:46px;height:46px;display:grid;place-items:center;font-size:27px;border-radius:15px;background:linear-gradient(135deg,#0878c9,#20b9c8)}
+.side-brand strong{display:block;font-size:17px;letter-spacing:-.4px}.side-brand small{display:block;font-size:10px;color:#a9c4df;margin-top:4px}
+.side-caption{font-size:10px;letter-spacing:1.5px;font-weight:900;color:#7e9ab6;padding:0 11px;margin-bottom:-12px}
+.side-nav{display:grid;gap:7px}.nav-item{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid transparent;border-radius:12px;padding:13px 12px;background:transparent;color:#c6d7e9;font-size:13px;font-weight:750;transition:background .15s,color .15s}.nav-item span{width:25px;height:25px;display:grid;place-items:center;font-size:18px;border-radius:8px;background:#ffffff0c}.nav-item:hover{background:#ffffff0b;color:#fff}.nav-item.active{background:linear-gradient(90deg,#0878c9,#0865a8);color:white;box-shadow:0 7px 18px #00152b55}.nav-item.active span{background:#ffffff22}
+.sidebar-official{margin-top:auto;padding:16px;border-radius:16px;border:1px solid #2a567a;background:#0b3457}.shield{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:#f28a28;color:#fff;font-size:20px;margin-bottom:12px}.sidebar-official strong{font-size:12px}.sidebar-official p{font-size:11px;line-height:1.5;color:#a9c4df;margin:7px 0 12px}.sidebar-official a{font-size:11px;color:#9ddfff;text-decoration:none}.sidebar-bottom{font-size:10px;color:#7f9ab4;line-height:1.5;padding:0 5px}
+.shell{width:100%;max-width:none;margin:0;padding:26px clamp(16px,2.5vw,38px) 24px;min-width:0}
+header{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #dce6f1;align-items:center}.brand{display:none}.header-right{max-width:100%;justify-content:flex-end}.live{background:#e7f8ef;color:#147449;border:1px solid #c7edd8}.dot{background:#20ad6a;box-shadow:0 0 0 4px #20ad6a20}.header-right button{border-radius:11px;font-size:12px;font-weight:800;padding:10px 13px;background:#fff;color:#174365;border-color:#d9e5f0}.header-right #refreshBtn{background:#0878c9;color:white;border-color:#0878c9}
+.page-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:3px 0 19px}.page-kicker{font-size:10px;font-weight:900;letter-spacing:1.8px;color:#1682bb;margin-bottom:6px}.page-heading h2{font-size:27px;letter-spacing:-.8px;margin:0;color:#102b49}.page-heading p{font-size:12px;color:#6c7e91;margin:6px 0 0}.official-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border-radius:30px;background:#fff;border:1px solid #dce6f1;color:#35536f;font-size:11px;font-weight:800;white-space:nowrap}.official-dot{width:8px;height:8px;background:#e9a329;border-radius:50%}
+.hero{background:linear-gradient(120deg,#07365d 0%,#0b5787 55%,#087a9c 100%);color:#fff;border:0;border-radius:23px;padding:clamp(20px,3vw,32px);box-shadow:0 14px 32px #123f631f}.hero:after{width:360px;height:360px;right:-80px;top:-130px;background:radial-gradient(circle,#8de8ef,transparent 68%);opacity:.13}.hero .eyebrow,.hero .sub,.hero .feels{color:#bcd7ea}.hero .cityline h2{color:#fff}.hero .tag{background:#ffffff12;color:#fff;border-color:#ffffff35}.hero .city-select{background:#fff;color:#173b59;border:0;min-width:230px}.hero .stat{background:#ffffff10;border-color:#ffffff24;backdrop-filter:blur(5px)}.hero .stat-label{color:#c0d9ea}.hero .stat-value{color:#fff}.hero .updatedAt,.hero .status{color:#bcd7ea}
+.section,.alert-panel{background:#fff;border:1px solid #e0e9f2;border-radius:19px;padding:clamp(17px,2vw,24px);box-shadow:0 7px 22px rgba(18,54,86,.045);margin-bottom:17px}.section h3,.alert-panel h3{color:#153652;font-size:17px}.section p{color:#6d8093}.section-head{align-items:center;margin-bottom:16px}.section-head .tag{color:#42617c;background:#f1f7fc;border-color:#e0eaf3}.alert-panel{background:#fff}.alert-banner{border-radius:15px}.alert-banner.critical{background:#fff3f1;color:#7e2525;border-color:#f4c4bf}.alert-banner.watch{background:#fff8e9;color:#704b0b;border-color:#f3d99a}.alert-banner.ok{background:#edfbf4;color:#155d3d;border-color:#b8e9cf}.alert-step{background:#f8fbfe;border-color:#e2ebf4}.alert-step b{color:#183b58}.alert-step p{color:#61788e}.alert-actions{gap:12px}.hour{background:#f8fbff;border-color:#e0eaf3;border-radius:15px;min-width:100px}.hour.current{background:#eaf6ff;border-color:#1687ca}.day{background:#f8fbff;border-color:#e0eaf3;border-radius:15px}.notice{background:#f8fbff;border-color:#e0eaf3;border-radius:15px}.notice strong{color:#183b58}.emergency{background:#f8fbff;border-color:#e0eaf3;border-radius:15px}.emergency .num{color:#0d6fac}.call{background:#0878c9;color:#fff}.place{background:#f8fbff;border-color:#e0eaf3;border-radius:15px}.place h4{color:#183b58}.footer{border-top:1px solid #dce6f1;padding-top:18px;margin-top:8px;color:#6b7f92}
+[data-page]:not(.active-page){display:none!important}.grid2[data-page="ajuda"]{align-items:start}.grid2[data-page="ajuda"] .section{height:100%}
+a{color:#0878c9}.source-links a,.actionlink{background:#f8fbff;border-color:#dce6f1;color:#086eae}.status{line-height:1.55}
+@media(max-width:1000px){.app-layout{grid-template-columns:210px minmax(0,1fr)}.sidebar{padding:20px 12px}.shell{padding:20px 16px}.hero .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.alert-actions{grid-template-columns:1fr}.days{grid-template-columns:repeat(4,minmax(135px,1fr));overflow-x:auto}}
+@media(max-width:760px){.app-layout{display:block;padding-bottom:72px}.sidebar{position:fixed;top:auto;bottom:0;left:0;right:0;height:auto;min-height:0;padding:8px 7px calc(8px + env(safe-area-inset-bottom));display:block;overflow:visible;border-top:1px solid #2b4964;box-shadow:0 -8px 24px #071c3020}.side-brand,.side-caption,.sidebar-official,.sidebar-bottom{display:none}.side-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.nav-item{display:flex;flex-direction:column;justify-content:center;gap:3px;text-align:center;padding:7px 2px;font-size:9px;border-radius:10px;white-space:normal;min-width:0}.nav-item span{width:24px;height:22px;font-size:17px}.shell{padding:14px 12px 22px}header{padding-bottom:12px}.header-right{width:100%;justify-content:space-between;gap:6px}.header-right .live{display:none}.header-right button{flex:1;padding:10px 7px;font-size:11px}.page-heading{align-items:flex-start}.page-heading h2{font-size:23px}.page-heading p{max-width:360px;line-height:1.5}.official-pill{display:none}.hero{padding:20px;border-radius:18px}.hero-top{gap:15px}.hero .city-select{min-width:0;width:100%}.hero label{width:100%}.hero .now{gap:12px;margin-top:18px}.hero .big-icon{font-size:56px}.hero .temp{font-size:61px}.hero .desc{font-size:15px}.hero .stats{margin-top:21px}.section,.alert-panel{padding:16px;border-radius:16px}.grid2{grid-template-columns:1fr}.emergency-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.places{grid-template-columns:1fr}.days{grid-template-columns:repeat(7,145px)}.alert-actions{grid-template-columns:1fr}.alert-banner{padding:13px}.section-head{align-items:flex-start}.section-head .tag{display:none}}
+@media(max-width:390px){.hero .temp{font-size:53px}.hero .big-icon{font-size:48px}.hero .stat{padding:10px}.hero .stat-value{font-size:17px}.emergency{padding:11px}.emergency .num{font-size:24px}}
+
+</style>
+</head>
+<body class="morning">
+<div class="app-layout">
+<aside class="sidebar" aria-label="Navegação principal">
+  <a class="side-brand" href="#inicio" aria-label="Tempo Paraná início"><span class="side-logo">🌦️</span><span><strong>Tempo Paraná</strong><small>Clima • Prevenção • Segurança</small></span></a>
+  <div class="side-caption">MENU PRINCIPAL</div>
+  <nav class="side-nav">
+    <button class="nav-item active" data-target="inicio" aria-current="page"><span>⌂</span> Visão geral</button>
+    <button class="nav-item" data-target="tempo"><span>☀</span> Tempo e previsão</button>
+    <button class="nav-item" data-target="ajuda"><span>✚</span> Ajuda e orientações</button>
+    <button class="nav-item" data-target="socorro"><span>☎</span> Socorro e atendimento</button>
+  </nav>
+  <div class="sidebar-official"><span class="shield">✚</span><strong>Prevenção salva vidas</strong><p>Informação confiável ajuda você a se proteger.</p><a href="https://www.defesacivil.pr.gov.br/" target="_blank" rel="noopener">Defesa Civil do Paraná ↗</a></div>
+  <div class="sidebar-bottom">Fontes oficiais sempre em primeiro lugar.</div>
+</aside>
+<div class="shell">
+<header>
+ <div class="brand"><div class="logo">🌦️</div><div><h1>Tempo Paraná</h1><div class="sub">Clima, monitoramento e prevenção</div></div></div>
+ <div class="header-right"><span class="live"><span class="dot"></span> Atualização automática</span><button id="notifyBtn" type="button">🔔 Ativar avisos</button><button id="refreshBtn" type="button">↻ Atualizar</button></div>
+</header>
+<div class="page-heading"><div><div class="page-kicker">PARANÁ • INFORMAÇÃO E PREVENÇÃO</div><h2 id="pageHeading">Visão geral</h2><p>Previsão meteorológica, orientações de segurança e caminhos para pedir ajuda.</p></div><span class="official-pill"><span class="official-dot"></span> Consulte alertas oficiais</span></div>
+
+<section class="hero active-page" data-page="inicio">
+ <div class="hero-top">
+  <div><div class="eyebrow" id="daypart">ACOMPANHANDO O CÉU AGORA</div>
+   <div class="cityline"><h2 id="cityTitle">Londrina, PR</h2><span class="tag" id="localClock">--:--</span></div>
+   <div class="sub" id="todayDate">Carregando data…</div>
+  </div>
+  <label><span class="eyebrow" style="display:block;margin-bottom:7px">Escolha a cidade</span>
+   <select id="citySelect" class="city-select" aria-label="Escolha a cidade do Paraná">
+    <option value="Londrina">Londrina</option><option value="Curitiba">Curitiba</option><option value="Maringá">Maringá</option><option value="Cascavel">Cascavel</option><option value="Ponta Grossa">Ponta Grossa</option><option value="Foz do Iguaçu">Foz do Iguaçu</option><option value="Paranaguá">Paranaguá</option><option value="Guarapuava">Guarapuava</option><option value="Umuarama">Umuarama</option><option value="Pato Branco">Pato Branco</option><option value="Campo Mourão">Campo Mourão</option><option value="Apucarana">Apucarana</option><option value="Toledo">Toledo</option><option value="São José dos Pinhais">São José dos Pinhais</option><option value="Paranavaí">Paranavaí</option><option value="Telêmaco Borba">Telêmaco Borba</option><option value="Irati">Irati</option><option value="União da Vitória">União da Vitória</option><option value="Jacarezinho">Jacarezinho</option><option value="Guaratuba">Guaratuba</option>
+   </select>
+  </label>
+ </div>
+ <div class="now"><div class="big-icon" id="mainIcon">⛅</div><div><div class="temp"><span id="temperature">--</span><span style="font-size:.48em;vertical-align:top;letter-spacing:0">°C</span></div><div class="desc" id="condition">Buscando previsão…</div><div class="feels" id="feels">Sensação térmica: —</div></div></div>
+ <div class="stats">
+  <div class="stat"><div class="stat-label">💧 Umidade</div><div class="stat-value" id="humidity">—</div></div>
+  <div class="stat"><div class="stat-label">🌧️ Chance de chuva</div><div class="stat-value" id="rainChance">—</div></div>
+  <div class="stat"><div class="stat-label">💨 Vento</div><div class="stat-value" id="wind">—</div></div>
+  <div class="stat"><div class="stat-label">🌡️ Sensação</div><div class="stat-value" id="apparent">—</div></div>
+ </div>
+ <div class="status" id="updatedAt">A previsão será carregada pela internet. Horários locais do Paraná.</div>
+</section>
+
+
+<section class="alert-panel active-page" data-page="inicio" aria-live="polite">
+ <div class="section-head"><div><h3>🚨 Central de prevenção</h3><p>Estimativa automática baseada na previsão meteorológica. Não é um alerta oficial da Defesa Civil.</p></div><span class="tag" id="alertUpdated">Monitoramento ativo</span></div>
+ <div class="alert-banner watch" id="alertBanner"><div class="alert-symbol" id="alertSymbol">⏳</div><div><div class="alert-title" id="alertTitle">Analisando as próximas horas…</div><div class="alert-copy" id="alertCopy">Carregando dados para identificar possíveis condições de chuva forte ou temporal.</div></div></div>
+ <div class="alert-actions">
+  <div class="alert-step"><b>1. O que fazer</b><p id="whatToDo">Acompanhe a previsão e evite permanecer em áreas vulneráveis se o tempo piorar.</p></div>
+  <div class="alert-step"><b>2. Onde buscar ajuda</b><p id="whereHelp">Em risco de desastre, procure abrigo seguro e consulte a Defesa Civil do seu município.</p><a href="https://www.defesacivil.pr.gov.br/" target="_blank" rel="noopener">Defesa Civil do Paraná ↗</a></div>
+  <div class="alert-step"><b>3. Como pedir ajuda</b><p id="howHelp">Risco imediato à vida: Bombeiros 193. Emergência médica: SAMU 192. Crime ou ameaça: Polícia 190.</p><a href="tel:193">Ligar 193 ↗</a></div>
+ </div>
+ <div class="notify-note" id="notifyStatus">Avisos no navegador são opcionais. Clique em “Ativar avisos” e permita notificações. Para receber avisos com o site fechado, será necessário publicar o sistema e configurar notificações push com servidor.</div>
+</section>
+
+<section class="section" data-page="tempo">
+ <div class="section-head"><div><h3>⏱️ O dia, hora por hora</h3><p>Acompanhe como o tempo deve evoluir ao longo das próximas horas.</p></div><span class="tag">Próximas 24 horas</span></div>
+ <div class="hourly" id="hourly"><div class="notice">Carregando previsão horária…</div></div>
+</section>
+
+<section class="section" data-page="tempo">
+ <div class="section-head"><div><h3>📅 Próximos 7 dias</h3><p>Uma visão rápida para planejar compromissos, viagens e atividades ao ar livre.</p></div></div>
+ <div class="days" id="days"><div class="notice">Carregando previsão diária…</div></div>
+</section>
+
+<div class="grid2" data-page="ajuda">
+ <section class="section">
+  <div class="section-head"><div><h3>🛰️ Fontes meteorológicas</h3><p>Consulte canais oficiais e compare informações antes de tomar decisões.</p></div></div>
+  <div class="notice"><div class="notice-icon">🌧️</div><div><strong>SIMEPAR — referência meteorológica do Paraná</strong><p>Consulte a previsão por município, os modelos numéricos e os dados monitorados pelo sistema meteorológico estadual.</p><a href="https://www.simepar.br/" target="_blank" rel="noopener">Abrir SIMEPAR ↗</a></div></div>
+  <div class="source-links"><a href="https://www.defesacivil.pr.gov.br/" target="_blank" rel="noopener">Defesa Civil do Paraná ↗</a><a href="https://www.gov.br/cemaden/pt-br" target="_blank" rel="noopener">CEMADEN ↗</a><a href="https://www.gov.br/inmet/pt-br" target="_blank" rel="noopener">INMET ↗</a></div>
+  <div class="status">A previsão horária usa a API Open-Meteo e é apenas indicativa. Este site não emite alertas oficiais nem representa um sistema da Defesa Civil. Para avisos oficiais, consulte a Defesa Civil do Paraná.</div><div class="notice" style="margin-top:12px"><div class="notice-icon">📲</div><div><strong>Receba alertas oficiais da Defesa Civil</strong><p>Envie seu CEP por SMS para <b>40199</b> para cadastrar a região de interesse. O serviço é gratuito. Também consulte as opções de WhatsApp no portal oficial.</p><a href="https://www.defesacivil.pr.gov.br/servicos/Seguranca/Defesa-Civil/Receber-alertas-da-Defesa-Civil-por-SMS-ERrZ4PN6" target="_blank" rel="noopener">Como se cadastrar ↗</a></div></div>
+ </section>
+ <section class="section">
+  <div class="section-head"><div><h3>🛡️ Cuidados em tempo severo</h3><p>Orientações gerais para reduzir riscos.</p></div></div>
+  <div class="notice"><div class="notice-icon">⛈️</div><div><strong>Durante temporais, raios ou ventos fortes</strong><p>Procure abrigo em construção segura. Afaste-se de árvores, postes, estruturas metálicas e janelas. Evite áreas abertas.</p></div></div>
+  <div class="notice" style="margin-top:10px"><div class="notice-icon">🌊</div><div><strong>Em alagamentos ou risco de deslizamento</strong><p>Não atravesse ruas alagadas a pé ou de veículo. Afaste-se de encostas, margens de rios e áreas inundadas. Siga as instruções da Defesa Civil.</p></div></div>
+ </section>
+</div>
+
+<section class="section" data-page="socorro">
+ <div class="section-head"><div><h3>📞 Telefones de emergência</h3><p>Toque em “Ligar” pelo celular. Use os números apenas quando a situação exigir atendimento.</p></div><span class="tag">Brasil • Paraná</span></div>
+ <div class="emergency-grid">
+  <div class="emergency"><div>🚓 Polícia Militar</div><div class="num">190</div><small>Crime em andamento ou risco imediato à segurança.</small><a class="call" href="tel:190">Ligar</a></div>
+  <div class="emergency"><div>🚑 SAMU</div><div class="num">192</div><small>Emergência médica, como infarto, AVC ou situação clínica grave.</small><a class="call" href="tel:192">Ligar</a></div>
+  <div class="emergency"><div>🚒 Bombeiros / SIATE</div><div class="num">193</div><small>Incêndio, resgate, salvamento e acidentes com trauma.</small><a class="call" href="tel:193">Ligar</a></div>
+  <div class="emergency"><div>🌧️ Defesa Civil</div><div class="num">199</div><small>Enchentes, deslizamentos e riscos de desastre. Disponibilidade pode variar por município.</small><a class="call" href="tel:199">Ligar</a></div>
+  <div class="emergency"><div>🚔 Polícia Rodoviária Federal</div><div class="num">191</div><small>Emergências e ocorrências em rodovias federais.</small><a class="call" href="tel:191">Ligar</a></div>
+  <div class="emergency"><div>🚧 Polícia Rodoviária Estadual</div><div class="num">198</div><small>Ocorrências em rodovias estaduais do Paraná.</small><a class="call" href="tel:198">Ligar</a></div>
+  <div class="emergency"><div>🕵️ Polícia Civil</div><div class="num">197</div><small>Orientações e denúncias à Polícia Civil.</small><a class="call" href="tel:197">Ligar</a></div>
+  <div class="emergency"><div>☎️ Disque-denúncia</div><div class="num">181</div><small>Canal para denúncias; não substitui serviços de emergência.</small><a class="call" href="tel:181">Ligar</a></div>
+ </div>
+ <div class="status">Lista de referência conferida em canais oficiais do Governo do Paraná e da Anatel. Fonte: <a href="https://www.seguranca.pr.gov.br/Telefones-Uteis" target="_blank" rel="noopener">Telefones úteis — SESP/PR</a> e <a href="https://www.gov.br/anatel/pt-br/regulado/numeracao/codigos-nacionais/servicos-de-utilidade-publica-e-de-emergencia" target="_blank" rel="noopener">Anatel</a>.</div>
+</section>
+
+<section class="section" data-page="socorro">
+ <div class="section-head"><div><h3>🏥 Onde procurar atendimento</h3><p>Pesquise serviços próximos à cidade selecionada. Em emergência grave, ligue para o serviço adequado.</p></div></div>
+ <div class="places">
+  <div class="place"><div class="place-icon">🏥</div><h4>UPA e pronto atendimento</h4><p>Para encontrar unidades de urgência próximas da cidade escolhida.</p><a id="upaLink" href="https://www.google.com/maps/search/UPA+Londrina+PR" target="_blank" rel="noopener">Encontrar no mapa ↗</a></div>
+  <div class="place"><div class="place-icon">🏨</div><h4>Hospitais próximos</h4><p>Consulte hospitais e serviços de saúde na região selecionada.</p><a id="hospitalLink" href="https://www.google.com/maps/search/hospital+Londrina+PR" target="_blank" rel="noopener">Encontrar no mapa ↗</a></div>
+  <div class="place"><div class="place-icon">🛟</div><h4>Defesa Civil e abrigos</h4><p>Em enchentes ou desastres, procure os pontos de apoio divulgados pelas autoridades municipais.</p><a href="https://www.defesacivil.pr.gov.br/" target="_blank" rel="noopener">Orientações oficiais ↗</a></div>
+ </div>
+ <ul class="safety"><li>Não foi possível confirmar em tempo real quais abrigos estão abertos. Os locais de acolhimento mudam conforme a ocorrência: confirme com a Defesa Civil ou a prefeitura local.</li><li>Em risco imediato, não espere a atualização deste site: procure um lugar seguro e acione o serviço de emergência.</li></ul>
+</section>
+
+<footer class="footer" data-page="ajuda">
+ <strong>Tempo Paraná • Clima & Prevenção</strong><br>
+ Este painel é informativo e não substitui alertas oficiais, orientações de autoridades ou avaliação profissional. Previsões podem mudar e não garantem que um fenômeno ocorrerá ou deixará de ocorrer. Requer conexão com a internet para carregar os dados. Os dados meteorológicos são fornecidos por Open-Meteo; consulte o SIMEPAR e a Defesa Civil para informações oficiais do Paraná.
+</footer>
+</div>
+</div>
+<script>
+const CITIES={
+"Londrina":[-23.3103,-51.1628],"Curitiba":[-25.4284,-49.2733],"Maringá":[-23.4205,-51.9333],"Cascavel":[-24.9578,-53.4595],"Ponta Grossa":[-25.0945,-50.1633],"Foz do Iguaçu":[-25.5469,-54.5882],"Paranaguá":[-25.5163,-48.5254],"Guarapuava":[-25.3905,-51.4628],"Umuarama":[-23.7664,-53.3250],"Pato Branco":[-26.2292,-52.6706],"Campo Mourão":[-24.0463,-52.3780],"Apucarana":[-23.5508,-51.4608],"Toledo":[-24.7246,-53.7433],"São José dos Pinhais":[-25.5313,-49.2031],"Paranavaí":[-23.0816,-52.4617],"Telêmaco Borba":[-24.3245,-50.6156],"Irati":[-25.4672,-50.6511],"União da Vitória":[-26.2270,-51.0873],"Jacarezinho":[-23.1605,-49.9739],"Guaratuba":[-25.8828,-48.5748]};
+const $=id=>document.getElementById(id);
+function showPage(page){
+ document.querySelectorAll('[data-page]').forEach(el=>el.classList.toggle('active-page',el.dataset.page===page));
+ document.querySelectorAll('.nav-item').forEach(btn=>{const active=btn.dataset.target===page;btn.classList.toggle('active',active);if(active)btn.setAttribute('aria-current','page');else btn.removeAttribute('aria-current');});
+ const titles={inicio:'Visão geral',tempo:'Tempo e previsão',ajuda:'Ajuda e orientações',socorro:'Socorro e atendimento'};
+ const label=$('pageHeading');if(label)label.textContent=titles[page]||titles.inicio;
+ if(window.matchMedia('(max-width: 850px)').matches) document.querySelector('.sidebar')?.classList.remove('mobile-open');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.nav-item').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.target)));
+document.querySelectorAll('[data-go-page]').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.goPage)));
+showPage('inicio');
+let currentData=null, selectedCity="Londrina", refreshTimer=null;
+const fmtDate=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long'});
+const fmtShort=new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'2-digit'});
+function weatherInfo(code,isDay=true){
+ if(code===0)return {icon:isDay?'☀️':'🌙',text:'Céu limpo'};
+ if([1].includes(code))return {icon:isDay?'🌤️':'🌙',text:'Predominantemente limpo'};
+ if([2].includes(code))return {icon:isDay?'⛅':'☁️',text:'Parcialmente nublado'};
+ if(code===3)return {icon:'☁️',text:'Nublado'};
+ if([45,48].includes(code))return {icon:'🌫️',text:'Neblina'};
+ if([51,53,55,56,57].includes(code))return {icon:'🌦️',text:'Garoa'};
+ if([61,63,65,66,67,80,81,82].includes(code))return {icon:'🌧️',text:'Chuva'};
+ if([71,73,75,77,85,86].includes(code))return {icon:'🌨️',text:'Neve ou granizo'};
+ if([95,96,99].includes(code))return {icon:'⛈️',text:'Trovoadas'};
+ return {icon:'🌡️',text:'Condição variável'};
+}
+function setTheme(date,isDay){
+ const h=date.getHours(); document.body.classList.remove('morning','afternoon','evening','night');
+ let cls,part;
+ if(isDay===false||h<5||h>=20){cls='night';part='BOA NOITE • ACOMPANHANDO O CÉU'}
+ else if(h<11){cls='morning';part='BOM DIA • ACOMPANHANDO O CÉU'}
+ else if(h<16){cls='afternoon';part='BOA TARDE • ACOMPANHANDO O CÉU'}
+ else {cls='evening';part='PÔR DO SOL • ACOMPANHANDO O CÉU'}
+ document.body.classList.add(cls); $('daypart').textContent=part;
+}
+function localNow(){return new Date();}
+function updateClock(){const d=localNow();$('localClock').textContent=d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});$('todayDate').textContent=fmtDate.format(d).replace(/^./,c=>c.toUpperCase());if(!currentData)setTheme(d,true);}
+function hourIcon(code,time,sunrise,sunset){const date=new Date(time);const day=date>=new Date(sunrise)&&date<new Date(sunset);return weatherInfo(code,day);}
+function safeNum(v,unit=''){return v==null||Number.isNaN(Number(v))?'—':`${Math.round(v)}${unit}`;}
+function setPlaces(city){const q=encodeURIComponent(city+' PR');$('upaLink').href='https://www.google.com/maps/search/'+encodeURIComponent('UPA pronto atendimento '+city+' Paraná');$('hospitalLink').href='https://www.google.com/maps/search/'+encodeURIComponent('hospital '+city+' Paraná');}
+function renderHourly(data){
+ const h=data.hourly, now=new Date();let start=h.time.findIndex(t=>new Date(t).getTime()>=now.getTime()-30*60*1000);if(start<0)start=0;
+ $('hourly').innerHTML='';
+ for(let i=start;i<Math.min(start+24,h.time.length);i++){
+  const t=new Date(h.time[i]), info=hourIcon(h.weather_code[i],h.time[i],data.daily.sunrise[0],data.daily.sunset[0]);
+  const card=document.createElement('div');card.className='hour'+(i===start?' current':'');
+  card.innerHTML=`<div class="hour-time">${i===start?'AGORA':t.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</div><div class="hour-icon">${info.icon}</div><div class="hour-temp">${safeNum(h.temperature_2m[i],'°')}</div><div class="hour-rain">💧 ${safeNum(h.precipitation_probability[i],'%')}</div><div class="hour-wind">💨 ${safeNum(h.wind_speed_10m[i],' km/h')}</div>`;
+  $('hourly').appendChild(card);
+ }
+}
+function renderDays(data){
+ const d=data.daily;$('days').innerHTML='';
+ for(let i=0;i<Math.min(7,d.time.length);i++){
+  const date=new Date(d.time[i]+'T12:00:00'), info=weatherInfo(d.weather_code[i],true);
+  const card=document.createElement('div');card.className='day';
+  card.innerHTML=`<div class="day-name">${i===0?'Hoje':date.toLocaleDateString('pt-BR',{weekday:'short'}).replace('.','')}</div><div class="day-date">${fmtShort.format(date)}</div><div class="day-icon">${info.icon}</div><div class="day-desc">${info.text}</div><div class="day-temps"><span>${safeNum(d.temperature_2m_max[i],'°')}</span><span>${safeNum(d.temperature_2m_min[i],'°')}</span></div><div class="rainbar"><span style="width:${Math.max(0,Math.min(100,d.precipitation_probability_max[i]||0))}%"></span></div><div class="hour-rain">💧 ${safeNum(d.precipitation_probability_max[i],'%')} de chuva</div>`;
+  $('days').appendChild(card);
+ }
+}
+
+let notificationEnabled=false;
+let lastNoticeKey='';
+function analyzeRisk(data){
+ const now=new Date(), h=data.hourly;
+ let start=h.time.findIndex(t=>new Date(t).getTime()>=now.getTime()-30*60*1000); if(start<0)start=0;
+ const end=Math.min(start+6,h.time.length); let maxProb=0,maxMm=0,maxWind=0,storm=false,peakTime=null;
+ for(let i=start;i<end;i++){
+   const prob=Number(h.precipitation_probability?.[i]||0), mm=Number(h.precipitation?.[i]||0), wind=Number(h.wind_speed_10m?.[i]||0), code=Number(h.weather_code?.[i]||0);
+   if(prob>maxProb||mm>maxMm){peakTime=h.time[i]}
+   maxProb=Math.max(maxProb,prob);maxMm=Math.max(maxMm,mm);maxWind=Math.max(maxWind,wind);
+   if([95,96,99].includes(code))storm=true;
+ }
+ let level='ok', title='Sem sinal forte de chuva nas próximas horas', symbol='✅';
+ let copy=`Na previsão consultada para ${selectedCity}, não foi identificado neste momento um sinal forte de chuva intensa nas próximas 6 horas. A previsão pode mudar; continue acompanhando os canais oficiais.`;
+ let todo='Mantenha-se informado. Se houver mudança rápida do tempo, procure abrigo e evite áreas abertas durante raios.';
+ if(storm||maxMm>=5||(maxProb>=70&&maxMm>=2)||maxWind>=50){
+   level='critical';title='Atenção: possível condição de tempo severo';symbol='⛈️';
+   copy=`A previsão indica condição que merece atenção nas próximas 6 horas. Maior probabilidade de chuva: ${Math.round(maxProb)}%; precipitação horária estimada: ${maxMm.toFixed(1)} mm; vento previsto até ${Math.round(maxWind)} km/h.${peakTime?' Horário a observar: '+new Date(peakTime).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+'.':''} Isto é uma estimativa meteorológica, não um alerta oficial.`;
+   todo='Evite deslocamentos desnecessários. Recolha objetos soltos, mantenha o celular carregado e afaste-se de árvores, postes, janelas e estruturas frágeis. Nunca atravesse rua alagada.';
+ } else if(maxProb>=45||maxMm>=0.5||maxWind>=35){
+   level='watch';title='Atenção: chuva ou vento podem ocorrer';symbol='🌧️';
+   copy=`Há possibilidade de chuva ou vento nas próximas 6 horas. Probabilidade máxima estimada: ${Math.round(maxProb)}%; precipitação horária: até ${maxMm.toFixed(1)} mm; vento: até ${Math.round(maxWind)} km/h. Consulte também os avisos oficiais.`;
+   todo='Planeje seus deslocamentos, leve proteção contra chuva e evite áreas sujeitas a alagamentos. Se houver trovões, entre em uma construção segura.';
+ }
+ const banner=$('alertBanner');banner.className='alert-banner '+level;$('alertSymbol').textContent=symbol;$('alertTitle').textContent=title;$('alertCopy').textContent=copy;$('whatToDo').textContent=todo;
+ $('alertUpdated').textContent='Análise das próximas 6h';
+ if(level==='critical'&&notificationEnabled&&'Notification'in window&&Notification.permission==='granted'){
+   const key=selectedCity+'|'+new Date().toISOString().slice(0,13)+'|'+title;
+   if(key!==lastNoticeKey){try{new Notification('Tempo Paraná • Atenção',{body:`${selectedCity}: possível condição de tempo severo. Abra o painel e confira os cuidados e fontes oficiais.`,icon:'https://open-meteo.com/favicon.ico'});lastNoticeKey=key;}catch(e){}}
+ }
+}
+async function enableNotifications(){
+ if(!('Notification'in window)){ $('notifyStatus').textContent='Este navegador não oferece notificações. Mantenha o site aberto e consulte os avisos oficiais.';return; }
+ if(!window.isSecureContext && location.hostname!=='localhost'){ $('notifyStatus').textContent='Para ativar notificações, abra o site publicado por HTTPS (ou localhost). Ao abrir o arquivo diretamente, alguns navegadores bloqueiam essa função.';return; }
+ try{const permission=await Notification.requestPermission();if(permission==='granted'){notificationEnabled=true;$('notifyStatus').textContent='Avisos do navegador ativados para esta sessão. O site precisa permanecer aberto; notificações podem não aparecer se o navegador suspender a página.';$('notifyBtn').textContent='🔔 Avisos ativados';if(currentData)analyzeRisk(currentData);}else{$('notifyStatus').textContent='Permissão não concedida. Você ainda pode acompanhar os avisos nesta tela e consultar a Defesa Civil.';}}catch(e){$('notifyStatus').textContent='Não foi possível ativar as notificações neste navegador.';}
+}
+
+async function loadWeather(){
+ selectedCity=$('citySelect').value||'Londrina';$('cityTitle').textContent=selectedCity+', PR';setPlaces(selectedCity);
+ $('updatedAt').textContent='Atualizando dados meteorológicos…';$('refreshBtn').disabled=true;
+ const [lat,lon]=CITIES[selectedCity];
+ const url=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,wind_speed_10m&hourly=temperature_2m,precipitation_probability,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset&timezone=America%2FSao_Paulo&forecast_days=7`;
+ try{
+  const res=await fetch(url);if(!res.ok)throw new Error('Não foi possível consultar o serviço de previsão.');const data=await res.json();currentData=data;
+  const c=data.current, info=weatherInfo(c.weather_code,!!c.is_day);$('mainIcon').textContent=info.icon;$('temperature').textContent=Math.round(c.temperature_2m);$('condition').textContent=info.text;$('feels').textContent='Dados horários • '+new Date(c.time).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  $('humidity').textContent=safeNum(c.relative_humidity_2m,'%');$('rainChance').textContent=safeNum(data.hourly.precipitation_probability[Math.max(0,data.hourly.time.findIndex(t=>t===c.time))]??data.daily.precipitation_probability_max[0],'%');$('wind').textContent=safeNum(c.wind_speed_10m,' km/h');$('apparent').textContent=safeNum(c.apparent_temperature,'°C');
+  const now=new Date(c.time);setTheme(now,!!c.is_day);$('localClock').textContent=now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});$('todayDate').textContent=fmtDate.format(now).replace(/^./,x=>x.toUpperCase());
+  renderHourly(data);renderDays(data);analyzeRisk(data);$('updatedAt').textContent='Atualizado em '+now.toLocaleString('pt-BR')+' • Fonte: Open-Meteo';
+ }catch(err){$('updatedAt').innerHTML='Não foi possível atualizar a previsão. Verifique sua conexão e tente novamente. Para condições oficiais, consulte <a href="https://www.simepar.br/" target="_blank" rel="noopener">SIMEPAR</a>.'; $('condition').textContent='Dados temporariamente indisponíveis';}
+ finally{$('refreshBtn').disabled=false;}
+}
+$('citySelect').addEventListener('change',loadWeather);$('refreshBtn').addEventListener('click',loadWeather);$('notifyBtn').addEventListener('click',enableNotifications);
+updateClock();loadWeather();setInterval(updateClock,15000);setInterval(loadWeather,15*60*1000);
+</script>
+</body>
+</html>
